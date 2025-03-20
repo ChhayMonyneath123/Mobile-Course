@@ -109,7 +109,7 @@ class Homescreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                "Let's protect the system and secure the network from cyber threats! ",
+                "Let's protect the systems and secure the network from cyber threats! ",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(
                   fontSize: 14,
