@@ -1,6 +1,6 @@
 # loginui
 
-A new Flutter project.
+This is LogIn and Registration UI project where the user can login and register their account.
 
 ## Getting Started
 
