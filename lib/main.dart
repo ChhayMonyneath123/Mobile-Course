@@ -183,20 +183,70 @@ class _WorktencyLandingPageState extends State<WorktencyLandingPage> {
                   ),
                 ),
                 const SizedBox(height: 30),
-                const Text('Featured Course', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 20),
-                GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 4/6,
+                DefaultTabController(
+                  length: 3,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(left: 12.0),
+                        child: Text(
+                          'Featured Course',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+
+                      TabBar(
+                        isScrollable: true,
+                        labelColor: Colors.black,
+                        unselectedLabelColor: Colors.grey,
+                        labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                        indicatorColor: Colors.orange,
+                        indicatorWeight: 2.5,
+                        tabs: const [
+                          Tab(text: 'Artificial Intelligent'),
+                          Tab(text: 'Machine Learning'),
+                          Tab(text: 'Self Development'),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+
+                      /// Wrap with `Expanded` if inside a Column
+                      SizedBox(
+                        height: 550, // 🔧 Adjust height to fit your layout
+                        child: TabBarView(
+                          children: [
+                            /// 👇 Fix Overflow: Wrap GridView in `SingleChildScrollView`
+                            SingleChildScrollView(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 12.0),
+                                child: GridView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: 6,
+                                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 2.4 / 4,
+                                    mainAxisSpacing: 10,
+                                    crossAxisSpacing: 10,
+                                  ),
+                                  itemBuilder: (context, index) => const CourseCard(),
+                                ),
+                              ),
+                            ),
+                            const Center(child: Text('Machine Learning content')),
+                            const Center(child: Text('Self Development content')),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  itemCount: 6,
-                  itemBuilder: (context, index) => const CourseCard(),
                 ),
+
+
                 const SizedBox(height: 30),
                 const Center(
                   child: Text(
@@ -219,7 +269,19 @@ class _WorktencyLandingPageState extends State<WorktencyLandingPage> {
                 ),
 
                 SizedBox(height: 30),
-                const Text('What we can share with you today', style: TextStyle(fontSize: 18)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/images/arrow.png',
+                        height: 32,
+                      ),
+                      SizedBox(width: 10),
+                      Text('To reach our only One goal\nWhat we can share with you today ', style: TextStyle(fontSize: 14)),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: 10),
                 ...List.generate(visiblePostCount, (index) => const BlogPost()),
                 if (visiblePostCount < 6) // limit to max 6 for now

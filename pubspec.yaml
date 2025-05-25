@@ -70,6 +70,7 @@ flutter:
     - assets/images/full-teacher.png
     - assets/images/meeting.png
     - assets/images/itc_logo.png
+    - assets/images/arrow.png
 #     - images/a_dot_ham.jpeg
 
   # An image assets can refer to one or more resolution-specific "variants", see

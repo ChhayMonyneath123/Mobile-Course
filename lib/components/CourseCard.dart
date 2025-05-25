@@ -26,7 +26,7 @@ class CourseCard extends StatelessWidget {
             Center(
               child: Image.asset(
                 'assets/images/Word.png',
-                height: 80,
+                height: 90,
               ),
             ),
             const SizedBox(height: 15),
@@ -40,7 +40,7 @@ class CourseCard extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 4),
+            const SizedBox(height: 10),
             Row(
               children: const [
                 Icon(Icons.network_wifi_2_bar_outlined, size: 14, color: Colors.black54),
@@ -60,32 +60,29 @@ class CourseCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
 
-            // Teacher Info
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(16),
-              ),
-              padding: const EdgeInsets.all(6),
+            // 👇 Add Flexible to prevent overflow
+            const Flexible(
               child: Row(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 14,
                     backgroundImage: AssetImage('assets/images/teacher.png'),
                   ),
-                  const SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Mr. Bunthorn Liv',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-                      ),
-                      Text(
-                        'Professor @ITC',
-                        style: TextStyle(fontSize: 10, color: Colors.black54),
-                      ),
-                    ],
+                  SizedBox(width: 8),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Mr. Bunthorn Liv',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                        ),
+                        Text(
+                          'Professor @ITC',
+                          style: TextStyle(fontSize: 10, color: Colors.black54),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
