@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 import 'search_bar.dart';
-import 'course_carousel.dart';
-import 'category_slider.dart';
+import 'default_content.dart';
+import 'search_screen.dart';
 import 'footer_links.dart';
 import 'bottom_nav_bar.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String? _searchQuery;
+
+  void _onSearch(String query) {
+    setState(() {
+      _searchQuery = query.trim().isEmpty ? null : query.trim();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFDFBFF),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
@@ -41,81 +55,25 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-
       body: Stack(
         children: [
           ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
             children: [
-              const SearchBarWidget(),
-              const SizedBox(height: 30),
-
-              // First carousel with arrow and title
-              CourseCarousel(
-                title: Padding(
-                  padding: const EdgeInsets.only(left: 10, bottom: 4),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/images/arrow1.png', height: 20),
-                      const SizedBox(width: 8),
-                      const Text(
-                        'Explore your favorite subjects!',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 30),
-
-              CourseCarousel(
-                title: Padding(
-                  padding: const EdgeInsets.only(left: 10, bottom: 4),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/images/arrow1.png', height: 20),
-                      const SizedBox(width: 8),
-                      const Text(
-                        'Build your competency with us!',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 30),
-
-              CourseCarousel(
-                title: Padding(
-                  padding: const EdgeInsets.only(left: 10, bottom: 4),
-                  child: Row(
-                    children: [
-                      Image.asset('assets/images/arrow1.png', height: 20),
-                      const SizedBox(width: 8),
-                      const Text(
-                        'Best recommended for you!',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 30),
-              const CategorySlider(),
+              SearchBarWidget(onSearch: _onSearch),
+              const SizedBox(height: 20),
+              _searchQuery == null
+                  ? const DefaultContent()
+                  : SearchContent(query: _searchQuery!),
               const SizedBox(height: 30),
               const FooterLinks(),
-              const SizedBox(height: 100), // to avoid being blocked by nav bar
+              const SizedBox(height: 100),
             ],
           ),
-
-          // Floating nav bar
           BottomNavBar(
             currentIndex: 2,
             onTap: (index) {
-              // TODO: Handle navigation or state change
+              // handle bottom nav here
             },
           ),
         ],
